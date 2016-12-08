@@ -46,3 +46,8 @@ def read_story(input_file):
     dct = create_kvp(parsed_file_text)
     story = assemble("", "", 200, dct)
     return story
+
+
+if __name__ == "__main__":
+	import sys
+	print(read_story(sys.argv[1]))
