@@ -5,12 +5,12 @@ import random
 
 
 def parse(text):
-    """Turns text into a list of words."""
+    """Turn text into a list of words."""
     return text.split()
 
 
 def create_kvp(text_list):
-    """Turns text_list into a dictionary of key value pairs in which every two consecutive words is a key for the value of the following word."""
+    """Turn text_list into a dictionary of key value pairs in which every two consecutive words is a key for the value of the following word."""
     dct = {}
     for idx in range(len(text_list) - 2):
         key = text_list[idx] + "_" + text_list[idx + 1]
@@ -36,8 +36,11 @@ def assemble(first, second, num, dct, text=""):
     return assemble(second, rand_val, num - 1, dct, text)
 
 
-def read_story(input_file):
-    """converts an input file into a text string and calls the other functions in trigrams to create a new 200 word story in the same style as the original."""
+def read_story(input_file=None):
+    """Convert an input file into a text string and calls the other functions in trigrams to create a new 200 word story in the same style as the original."""
+    if not input_file:
+        import sys
+        input_file = sys.argv[1]
     file = io.open(input_file)
     file_text = file.read()
     file.close()
@@ -49,5 +52,5 @@ def read_story(input_file):
 
 
 if __name__ == "__main__":
-	import sys
-	print(read_story(sys.argv[1]))
+    import sys
+    print(read_story(sys.argv[1]))
