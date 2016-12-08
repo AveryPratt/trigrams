@@ -115,18 +115,19 @@ ASSEMBLE_TABLE_RANDOM = [
 ]
 
 SIMPLE_INPUT_FILES = [
-	[
-		"./test_story1", 
-		"sad. ", 
-	],
+    [
+        "./test_story1",
+        "sad. ",
+    ],
 ]
 
 COMPLEX_INPUT_FILES = [
-	[
-		"./test_story2"
-		"One night--it was on the twentieth of March, 1888--I was returning from a journey to a patient (for I had now returned to civil practice), when my way led me through Baker Street. As I passed the well-remembered door, which must always be associated in my mind with my wooing, and with the dark incidents of the Study in Scarlet, I was seized with a keen desire to see Holmes again, and to know how he was employing his extraordinary powers. His rooms were brilliantly lit, and, even as I looked up, I saw his tall, spare figure pass twice in a dark silhouette against the blind. He was pacing the room swiftly, eagerly, with his head sunk upon his chest and his hands clasped behind him. To me, who knew his every mood and habit, his attitude and manner told their own story. He was at work again. He had risen out of his drug-created dreams and was hot upon the scent of some new problem. I rang the bell and was shown up to the chamber which had formerly been in part my own."
-	]
+    [
+        "./test_story2"
+        "One night--it was on the twentieth of March, 1888--I was returning from a journey to a patient (for I had now returned to civil practice), when my way led me through Baker Street. As I passed the well-remembered door, which must always be associated in my mind with my wooing, and with the dark incidents of the Study in Scarlet, I was seized with a keen desire to see Holmes again, and to know how he was employing his extraordinary powers. His rooms were brilliantly lit, and, even as I looked up, I saw his tall, spare figure pass twice in a dark silhouette against the blind. He was pacing the room swiftly, eagerly, with his head sunk upon his chest and his hands clasped behind him. To me, who knew his every mood and habit, his attitude and manner told their own story. He was at work again. He had risen out of his drug-created dreams and was hot upon the scent of some new problem. I rang the bell and was shown up to the chamber which had formerly been in part my own."
+    ]
 ]
+
 
 @pytest.mark.parametrize("text, result", PARSE_TABLE)
 def test_parse(text, result):
@@ -151,7 +152,7 @@ def test_generate_text(dct):
     result = generate_text(dct[0])
     all_values = []
     for key in dct[0]:
-    	all_values.extend(dct[0][key])
+        all_values.extend(dct[0][key])
 
     assert set(result.split()).issubset(set(all_values))
 
@@ -170,27 +171,28 @@ def test_assemble_random(first, second, num, dct, text):
     result = assemble(first, second, num, dct, text)
     all_values = []
     for key in dct:
-    	all_values.extend(dct[key])
+        all_values.extend(dct[key])
 
     # import pdb;pdb.set_trace()
     all_values.extend(text.split())
     assert set(result.split()).issubset(set(all_values))
 
+
 @pytest.mark.parametrize("input_file, result", SIMPLE_INPUT_FILES)
 def test_read_story(input_file, result):
-	"""Test read_story function with simple files to create a specific new story using trigrams."""
-	import trigrams
-	output = trigrams.read_story(input_file)
-	match = trigrams.generate_text(trigrams.create_kvp(trigrams.parse(result * 200)))
-	assert output == match
+    """Test read_story function with simple files to create a specific new story using trigrams."""
+    import trigrams
+    output = trigrams.read_story(input_file)
+    match = trigrams.generate_text(trigrams.create_kvp(trigrams.parse(result * 200)))
+    assert output == match
 
-@pytest.mark.parametrize("input_file, result", COMPLEX_INPUT_FILES)
-def test_read_story(input_file, result):
-	"""Test read_story function with complex files to create a new story of the same style using trigrams."""
-	from trigrams import read_story
-	output = read_story(input_file)
-	match = result.split()
 
-    # import pdb;pdb.set_trace()
-    
-	assert set(list(output)).issubset(set(list(match)))
+# @pytest.mark.parametrize("input_file, result", COMPLEX_INPUT_FILES)
+# def test_read_story(input_file, result):
+#     """Test read_story function with complex files to create a new story of the same style using trigrams."""
+#     from trigrams import read_story
+#     output = read_story(input_file)
+#     match = result.split()
+#     # import pdb
+#     # pdb.set_trace()
+#     assert set(list(output)).issubset(set(list(match)))
