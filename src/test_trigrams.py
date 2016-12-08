@@ -50,32 +50,6 @@ CREATE_KVP = [
 ]
 
 
-TEXT = [
-    [
-        {
-            "Howdily_doodily,": ["neighborooski."],
-            "doodily,_neighborooski.": ["My"],
-            "neighborooski._My": ["name"],
-            "My_name": ["is"],
-            "name_is": ["Ned"],
-            "is_Ned": ["Flanders."],
-        },
-    ],
-    [
-        {
-            "The_quick": ["brown"],
-            "quick_brown": ["fox"],
-            "brown_fox": ["jumped"],
-            "fox_jumped": ["over"],
-            "jumped_over": ["the"],
-            "over_the": ["lazy"],
-            "the_lazy": ["ass"],
-            "lazy_ass": ["dogs."],
-        },
-    ],
-]
-
-
 ASSEMBLE_TABLE = [
     ["first", "second", 1, {"first_second": ["third"]}, "", "third", ],
     ["first", "second", 0, {"first_second": ["third"]}, "", "", ],
@@ -140,18 +114,6 @@ def test_create_kvp(result, dct):
     assert create_kvp(result) == dct
 
 
-@pytest.mark.parametrize("dct", TEXT)
-def test_generate_text(dct):
-    """Test generate_text function to return new text based on the trigram dictionary."""
-    from trigrams import generate_text
-    result = generate_text(dct[0])
-    all_values = []
-    for key in dct[0]:
-        all_values.extend(dct[0][key])
-
-    assert set(result.split()).issubset(set(all_values))
-
-
 @pytest.mark.parametrize("first, second, num, dct, text, result", ASSEMBLE_TABLE)
 def test_assemble(first, second, num, dct, text, result):
     """Test assemble function to recursively generate random words from dictionary."""
@@ -176,7 +138,7 @@ def test_read_story(input_file, result):
     """Test read_story function with simple files to create a specific new story using trigrams."""
     import trigrams
     output = trigrams.read_story(input_file)
-    match = trigrams.generate_text(trigrams.create_kvp(trigrams.parse(result * 200)))
+    match = trigrams.assemble("", "", 200, (trigrams.create_kvp(trigrams.parse(result * 200))))
     assert output == match
 
 

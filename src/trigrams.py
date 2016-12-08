@@ -21,16 +21,6 @@ def create_kvp(text_list):
     return dct
 
 
-def generate_text(dct):
-    """Uses the assemble function to generate a new story based on the key value pairs in dct."""
-    rand_key = random.choice(list(dct.keys()))
-    rand_val1 = random.choice(dct[rand_key])
-
-    rand_key = random.choice(list(dct.keys()))
-    rand_val2 = random.choice(dct[rand_key])
-    return assemble(rand_val1, rand_val2, 200, dct, "")
-
-
 def assemble(first, second, num, dct, text=""):
     """Recursively creates a new story that is num words long by adding a word to text associated with the key created by first and second."""
     if num <= 0:
@@ -51,4 +41,8 @@ def read_story(input_file):
     file = io.open(input_file)
     file_text = file.read()
     file.close()
-    return generate_text(create_kvp(parse(file_text.replace("\n", " ").replace("\r", ""))))
+    clean_file_text = file_text.replace("\n", " ").replace("\r", "")
+    parsed_file_text = parse(clean_file_text)
+    dct = create_kvp(parsed_file_text)
+    story = assemble("", "", 200, dct)
+    return story
