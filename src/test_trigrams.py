@@ -61,9 +61,6 @@ TEXT = [
             "is_Ned": ["Flanders."],
         },
     ],
-    # [
-    #     {},
-    # ],
     [
         {
             "The_quick": ["brown"],
@@ -147,8 +144,6 @@ def test_create_kvp(result, dct):
 def test_generate_text(dct):
     """Test generate_text function to return new text based on the trigram dictionary."""
     from trigrams import generate_text
-
-    # import pdb;pdb.set_trace()
     result = generate_text(dct[0])
     all_values = []
     for key in dct[0]:
@@ -172,8 +167,6 @@ def test_assemble_random(first, second, num, dct, text):
     all_values = []
     for key in dct:
         all_values.extend(dct[key])
-
-    # import pdb;pdb.set_trace()
     all_values.extend(text.split())
     assert set(result.split()).issubset(set(all_values))
 

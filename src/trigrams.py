@@ -5,12 +5,12 @@ import random
 
 
 def parse(text):
-    """Docstring."""
+    """Turns text into a list of words."""
     return text.split()
 
 
 def create_kvp(text_list):
-    """Docstring."""
+    """Turns text_list into a dictionary of key value pairs in which every two consecutive words is a key for the value of the following word."""
     dct = {}
     for idx in range(len(text_list) - 2):
         key = text_list[idx] + "_" + text_list[idx + 1]
@@ -22,8 +22,7 @@ def create_kvp(text_list):
 
 
 def generate_text(dct):
-    """Docstring."""
-    # import pdb;pdb.set_trace()
+    """Uses the assemble function to generate a new story based on the key value pairs in dct."""
     rand_key = random.choice(list(dct.keys()))
     rand_val1 = random.choice(dct[rand_key])
 
@@ -33,7 +32,7 @@ def generate_text(dct):
 
 
 def assemble(first, second, num, dct, text=""):
-    """Docstring."""
+    """Recursively creates a new story that is num words long by adding a word to text associated with the key created by first and second."""
     if num <= 0:
         return text[:-1]
     key = first + "_" + second
@@ -48,7 +47,7 @@ def assemble(first, second, num, dct, text=""):
 
 
 def read_story(input_file):
-    """Docstring."""
+    """converts an input file into a text string and calls the other functions in trigrams to create a new 200 word story in the same style as the original."""
     file = io.open(input_file)
     file_text = file.read()
     file.close()
