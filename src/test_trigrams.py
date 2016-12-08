@@ -1,4 +1,9 @@
 """Trigrams."""
+
+
+import pytest
+
+
 PARSE_TABLE = [
     [
         "Howdily doodily, neighborooski. My name is Ned Flanders.",
@@ -82,42 +87,42 @@ ASSEMBLE_TABLE = [
     ["first", "second", 0, {"first_second": ["third"]}, "random jibberish ", "random jibberish", ],
     ["first", "second", 3, {"first_second": ["third"]}, "random jibberish ", "random jibberish third third third", ],
     [
-	    "first", 
-	    "second", 
-	    0, 
-	    {
-	        "The_quick": ["brown", "quick", "lazy"],
-	        "quick_brown": ["fox", "ass"],
-	        "brown_fox": ["jumped", "the", "lazy", "fox"],
-	        "fox_jumped": ["over", "The", "the"],
-	        "first_second": ["The", "dogs."],
-	        "second_the": ["quick", "brown", "lazy"],
-	        "jumped_over": ["the"],
-	        "over_the": ["lazy", "over"],
-	        "the_lazy": ["ass", "jumped"],
-	        "lazy_ass": ["dogs.", "The", "lazy", "ass"],
-	    }, 
-	    "random jibberish ", 
-	    "random jibberish", 
+        "first",
+        "second",
+        0,
+        {
+            "The_quick": ["brown", "quick", "lazy"],
+            "quick_brown": ["fox", "ass"],
+            "brown_fox": ["jumped", "the", "lazy", "fox"],
+            "fox_jumped": ["over", "The", "the"],
+            "first_second": ["The", "dogs."],
+            "second_the": ["quick", "brown", "lazy"],
+            "jumped_over": ["the"],
+            "over_the": ["lazy", "over"],
+            "the_lazy": ["ass", "jumped"],
+            "lazy_ass": ["dogs.", "The", "lazy", "ass"],
+        },
+        "random jibberish ",
+        "random jibberish",
     ],
     [
-    	"first", 
-	    "second", 
-	    3, 
-	    {
-	        "The_quick": ["brown", "quick", "lazy"],
-	        "quick_brown": ["fox", "ass"],
-	        "brown_fox": ["jumped", "the", "lazy", "fox"],
-	        "fox_jumped": ["over", "The", "the"],
-	        "first_second": ["The", "dogs."],
-	        "second_the": ["quick", "brown", "lazy"],
-	        "jumped_over": ["the"],
-	        "over_the": ["lazy", "over"],
-	        "the_lazy": ["ass", "jumped"],
-	        "lazy_ass": ["dogs.", "The", "lazy", "ass"],
-	    }, 
-    	"random jibberish ", 
-    	"random jibberish third third third", 
+        "first",
+        "second",
+        3,
+        {
+            "The_quick": ["brown", "quick", "lazy"],
+            "quick_brown": ["fox", "ass"],
+            "brown_fox": ["jumped", "the", "lazy", "fox"],
+            "fox_jumped": ["over", "The", "the"],
+            "first_second": ["The", "dogs."],
+            "second_the": ["quick", "brown", "lazy"],
+            "jumped_over": ["the"],
+            "over_the": ["lazy", "over"],
+            "the_lazy": ["ass", "jumped"],
+            "lazy_ass": ["dogs.", "The", "lazy", "ass"],
+        },
+        "random jibberish ",
+        "random jibberish third third third",
     ],
 ]
 
@@ -149,7 +154,6 @@ ASSEMBLE_TABLE_RANDOM = [
         "random jibberish ", ],
 ]
 
-import pytest
 
 @pytest.mark.parametrize("text, result", PARSE_TABLE)
 def test_parse(text, result):
@@ -186,7 +190,7 @@ def test_assemble_random(first, second, num, dct, text):
     result = trigrams.assemble(first, second, num, dct, text)
     all_values = []
     for key in dct:
-    	all_values.extend(dct[key])
+        all_values.extend(dct[key])
 
     # import pdb;pdb.set_trace()
     all_values.extend(text.split())
