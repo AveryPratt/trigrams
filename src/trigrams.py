@@ -6,7 +6,8 @@ import sys
 
 
 def create_dct(text_list):
-    """Turn text_list into a dictionary of key value pairs in which every two consecutive words is a key for the value of the following word."""
+    """Turn text_list into a dictionary of key value pairs in which
+    every two consecutive words is a key for the value of the following word."""
     dct = {}
     for idx in range(len(text_list) - 2):
         key = "_".join([text_list[idx], text_list[idx + 1]])
@@ -16,7 +17,8 @@ def create_dct(text_list):
 
 
 def assemble(dct, num=200, text="", first="", second=""):
-    """Recursively creates a new story that is num words long by adding a word to text associated with the key created by first and second."""
+    """Recursively creates a new story that is num words long by adding a word
+    to text associated with the key created by first and second."""
     if num <= 0:
         return text[:-1]
     key = "_".join([first, second])
@@ -30,7 +32,8 @@ def assemble(dct, num=200, text="", first="", second=""):
 
 
 def create_story(input_file=None, words=200):
-    """Convert an input file into a text string and calls the other functions in trigrams to create a new 200 word story in the same style as the original."""
+    """Convert an input file into a text string and calls the other functions
+    in trigrams to create a new 200 word story in the same style as the original."""
     file_text = read_file(input_file)
     clean_file_text = file_text.replace("\n", " ").replace("\r", "")
     dct = create_dct(clean_file_text.split())
@@ -42,9 +45,9 @@ def read_file(input_file):
     """Uses io to read a text file and return a string"""
     if not input_file:
         input_file = sys.argv[1]
-    with io.open(input_file) as file:
-        return file.read()
+    with io.open(input_file) as story_file:
+        return story_file.read()
 
 
-if __name__ == "__main__":
-    print(read_story(sys.argv[1], sys.argv[2]))
+# if __name__ == "__main__":
+#     print create_story(sys.argv[1], sys.argv[2])
