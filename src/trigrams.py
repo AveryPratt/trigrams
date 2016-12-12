@@ -1,4 +1,4 @@
-"""Trigrams."""
+"""Trigram assignment."""
 
 import io
 import random
@@ -49,7 +49,7 @@ def create_story(input_file=None, words=200):
 
 
 def read_file(input_file):
-    """Uses io to read a text file and return a string"""
+    """Use io to read a text file and return a string."""
     if not input_file:
         input_file = sys.argv[1]
     with io.open(input_file) as story_file:
